@@ -94,7 +94,11 @@ Describe the Javascript and CSS bundles you would like to create in
 
 By default, deferring is enabled, and bundling is disabled when
 ``settings.DEBUG`` is ``True``.  You can override those values in your settings
-module.  See the ``media_bundle.default_settings`` module for more info.  
+module by adding the line::
+
+  FORCE_BUNDLES = True
+
+See the ``media_bundle.default_settings`` module for more info.
 
 To source your Javascript and CSS, put ``{% load bundler_tags %}`` at the top of
 your template, and wherever you used to write this::
@@ -119,3 +123,8 @@ the files in the bundle.
 If you are deferring your Javascript, then at the bottom of your base template
 you should insert the tag ``{% deferred_content %}``.  We recommend opening a
 second head tag after your body and putting it there.
+
+Once your settings file is configured, you'll need to run the following line to
+generate the concatenated (and minimised) files::
+
+  python manage.py bundle_media
